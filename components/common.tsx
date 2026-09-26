@@ -1,0 +1,11 @@
+import Link from 'next/link';
+import { Header } from './header';
+import { Arrow,Mark } from './icons';
+import { site } from '@/lib/site';
+export function JsonLd({data}:{data:unknown}){return <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(data).replace(/</g,'\\u003c')}}/>;}
+export function TextLink({href,children,external=false}:{href:string;children:React.ReactNode;external?:boolean}){return <Link className="text-link" href={href} {...(external?{target:'_blank',rel:'noopener noreferrer'}:{})}>{children}<Arrow diagonal={external}/>{external&&<span className="sr-only"> (opens in new tab)</span>}</Link>;}
+export function Footer(){return <footer className="footer"><Link href="/" className="footer-brand"><Mark/>Mayank Harsh</Link><p>Art. Culture. Social.</p><div><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a><Link href="/contact">Contact</Link><span>© {new Date().getUTCFullYear()}</span></div></footer>;}
+export function ContactCTA(){return <section className="section contact-cta"><p className="eyebrow">A conversation is a good beginning</p><Link href="/contact"><h2>Let&apos;s make<br/>something <em>matter.</em></h2><span className="big-arrow"><Arrow diagonal/></span></Link><p>Creative direction · Social strategy · Collaboration</p></section>;}
+export function PageShell({children}:{children:React.ReactNode}){return <><div className="inner-header"><Header/></div><main id="main" className="inner-main">{children}</main><Footer/></>;}
+export function PageIntro({label,title,children}:{label:string;title:string;children:React.ReactNode}){return <div className="page-intro"><p className="eyebrow">{label}</p><h1>{title}</h1><div className="intro-copy">{children}</div></div>;}
+export function Breadcrumbs({items}:{items:{label:string;path:string}[]}){return <><nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/">Home</Link>{items.map((item,i)=><span key={item.path}><span aria-hidden="true">/</span>{i===items.length-1?<span aria-current="page">{item.label}</span>:<Link href={item.path}>{item.label}</Link>}</span>)}</nav><JsonLd data={{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{name:'Home',item:site.url},...items.map(i=>({name:i.label,item:site.url+i.path}))].map((i,index)=>({'@type':'ListItem',position:index+1,...i}))}}/></>;}

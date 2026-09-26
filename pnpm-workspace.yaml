@@ -1,0 +1,7 @@
+packages:
+  - '.'
+overrides:
+  browserslist: 4.29.1
+# Optional native resolver binaries are supplied by its platform packages.
+allowBuilds:
+  unrs-resolver: false

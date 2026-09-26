@@ -1,0 +1,2 @@
+import { PageShell,TextLink } from '@/components/common';
+export default function NotFound(){return <PageShell><div className="not-found"><p className="eyebrow">404 / A missing page</p><h1>This one slipped<br/>out of the frame.</h1><p>The page you&apos;re looking for isn&apos;t here. There&apos;s more to explore in the work.</p><TextLink href="/work">Back to selected work</TextLink></div></PageShell>;}
