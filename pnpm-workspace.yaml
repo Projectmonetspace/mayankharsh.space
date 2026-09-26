@@ -1,0 +1,4 @@
+packages:
+  - '.'
+overrides:
+  browserslist: 4.29.1
